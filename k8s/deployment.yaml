@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-manager
+  labels:
+    app: task-manager
+spec:
+  replicas: 3                        # Même chose que Swarm : 3 pods en parallèle
+  selector:
+    matchLabels:
+      app: task-manager              # Le Deployment gère les pods avec ce label
+  template:
+    metadata:
+      labels:
+        app: task-manager
+    spec:
+      containers:
+        - name: api
+          image: task-manager:latest
+          imagePullPolicy: Never     # Ne pas chercher l'image sur Docker Hub, utiliser le local
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: "3000"
+          # Liveness probe : "le container est-il vivant ?"
+          # Si elle échoue → K8s tue et recrée le pod (équivalent restart_policy de Swarm)
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5   # Attendre 5s avant la première vérification
+            periodSeconds: 10        # Vérifier toutes les 10s
+          # Readiness probe : "le container est-il prêt à recevoir du trafic ?"
+          # Si elle échoue → K8s retire le pod du load balancer (mais ne le tue pas)
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 3
+            periodSeconds: 5

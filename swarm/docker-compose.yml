@@ -1,0 +1,28 @@
+version: "3.8"
+
+networks:
+  task-net:
+    driver: overlay
+    # Un réseau overlay s'étend sur tous les nœuds du swarm
+    # Il permet aux containers de se parler par leur nom de service
+
+services:
+  api:
+    image: task-manager:latest
+    networks:
+      - task-net
+    ports:
+      - "3000:3000"
+    deploy:
+      replicas: 3                  # On veut 3 containers qui tournent en parallèle
+      update_config:
+        parallelism: 1             # Mise à jour un container à la fois (rolling update)
+        delay: 10s                 # Attendre 10s entre chaque mise à jour
+      restart_policy:
+        condition: on-failure      # Redémarrer automatiquement si le container plante
+        max_attempts: 3
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      interval: 10s                # Vérifier toutes les 10s
+      timeout: 5s                  # Timeout si pas de réponse après 5s
+      retries: 3                   # Après 3 échecs → container considéré "unhealthy"

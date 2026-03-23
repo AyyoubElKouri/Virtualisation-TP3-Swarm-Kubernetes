@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: task-manager-service
+spec:
+  type: NodePort          # Expose le service sur un port du nœud (accessible depuis l'extérieur)
+  selector:
+    app: task-manager     # Cible tous les pods avec le label "app: task-manager"
+  ports:
+    - protocol: TCP
+      port: 3000          # Port du Service interne
+      targetPort: 3000    # Port du container
+      nodePort: 30000     # Port exposé sur le nœud (accès externe)
