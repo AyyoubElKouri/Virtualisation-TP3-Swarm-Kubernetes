@@ -11,7 +11,7 @@
 4. [Prérequis et installation des outils](#4-prérequis-et-installation-des-outils)
 5. [Build de l'image Docker](#5-build-de-limage-docker)
 6. [Partie 1 — Docker Swarm](#6-partie-1--docker-swarm-)
-7. [Partie 2 — Kubernetes](#7-partie-2--kubernetes-️)
+7. [Partie 2 — Kubernetes](#7-partie-2--kubernetes-)
 8. [Comparaison réseau — le cœur du TP](#8-comparaison-réseau--le-cœur-du-tp-)
 9. [Tableau comparatif final](#9-tableau-comparatif-final)
 10. [Nettoyage](#10-nettoyage)
@@ -173,7 +173,7 @@ docker images | grep task-manager
 
 ---
 
-## 6. Partie 1 — Docker Swarm 🐝
+## 6. Partie 1 — Docker Swarm
 
 ### 6.1 Concepts fondamentaux de Swarm
 
@@ -260,7 +260,7 @@ Résultat attendu :
 ID             NAME           MODE         REPLICAS   IMAGE                 PORTS
 ud913246z2jb   tp-swarm_api   replicated   3/3        task-manager:latest   *:3000->3000/tcp
 ```
-> `3/3` = 3 replicas demandés, 3 en cours d'exécution. ✅
+> `3/3` = 3 replicas demandés, 3 en cours d'exécution.
 
 ```bash
 # Voir les containers individuels (tasks)
@@ -331,7 +331,7 @@ tp-swarm_api.3   Running 2 minutes ago
 
 ---
 
-### 6.8 Test 3 — Inspection réseau Swarm 🌐
+### 6.8 Test 3 — Inspection réseau Swarm
 
 ```bash
 # Lister tous les réseaux Docker
@@ -431,7 +431,7 @@ docker service scale tp-swarm_api=3
 
 ---
 
-## 7. Partie 2 — Kubernetes ☸️
+## 7. Partie 2 — Kubernetes
 
 ### 7.1 Concepts fondamentaux de Kubernetes
 
@@ -546,7 +546,7 @@ task-manager-fd89d6f7-z64xl   1/1     Running   0          5s   ← nouveau pod
 
 ---
 
-### 7.8 Test 3 — Inspection réseau Kubernetes 🌐
+### 7.8 Test 3 — Inspection réseau Kubernetes
 
 ```bash
 # Vue d'ensemble des services
@@ -656,7 +656,7 @@ Résultat :
 
 ---
 
-## 8. Comparaison réseau — le cœur du TP 🌐
+## 8. Comparaison réseau — le cœur du TP
 
 C'est la partie que ton professeur a mentionnée : "inspecter le réseau".
 
