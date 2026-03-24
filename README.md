@@ -22,12 +22,12 @@
 
 ### Le problème sans orchestrateur
 
-Imagine que tu as une API qui tourne dans un container Docker. Si ce container plante à 3h du matin, ton application est morte — jusqu'à ce que quelqu'un remarque le problème et relance manuellement le container. C'est inacceptable en production.
+Imaginez que vous avez une API qui tourne dans un container Docker. Si ce container plante à 3h du matin, votre application est morte — jusqu'à ce que quelqu'un remarque le problème et relance manuellement le container. C'est inacceptable en production.
 
-De plus, si ton application reçoit beaucoup de trafic, un seul container ne suffit pas. Tu as besoin d'en lancer plusieurs en parallèle pour partager la charge.
+De plus, si votre application reçoit beaucoup de trafic, un seul container ne suffit pas. Vous avez besoin d'en lancer plusieurs en parallèle pour partager la charge.
 
 C'est là qu'intervient un **orchestrateur de containers** : c'est un système qui :
-- **Lance automatiquement** plusieurs copies (replicas) de ton application
+- **Lance automatiquement** plusieurs copies (replicas) de votre application
 - **Surveille** en permanence que les containers sont vivants
 - **Recrée automatiquement** un container s'il plante (résilience)
 - **Distribue le trafic** entre les replicas (load balancing)
@@ -109,7 +109,7 @@ kubectl version --client
 
 ### 4.3 Installer `minikube` — le cluster Kubernetes local
 
-Kubernetes est normalement déployé sur plusieurs serveurs. Minikube crée un **mini-cluster Kubernetes simulé** sur ta machine locale, dans un container Docker. Parfait pour le développement et les TPs.
+Kubernetes est normalement déployé sur plusieurs serveurs. Minikube crée un **mini-cluster Kubernetes simulé** sur votre machine locale, dans un container Docker.
 
 ```bash
 # Télécharger
@@ -194,7 +194,7 @@ docker images | grep task-manager
 docker swarm init
 ```
 
-Cette commande transforme ton Docker Engine en **manager de Swarm**. Elle :
+Cette commande transforme votre Docker Engine en **manager de Swarm**. Elle :
 - Active le mode Swarm dans Docker
 - Crée les clés cryptographiques pour sécuriser le cluster
 - Affiche un token pour que d'autres machines puissent rejoindre le cluster (pas nécessaire pour ce TP)
@@ -453,7 +453,7 @@ docker service scale tp-swarm_api=3
 
 ### 7.2 Charger l'image dans Minikube
 
-Minikube tourne dans son propre container Docker isolé. Il ne voit **pas** les images que tu as buildées sur ta machine hôte. Il faut les lui transférer explicitement.
+Minikube tourne dans son propre container Docker isolé. Il ne voit **pas** les images que vous avez buildées sur votre machine hôte. Il faut les lui transférer explicitement.
 
 ```bash
 minikube start
@@ -470,7 +470,7 @@ kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 ```
 
-> `kubectl apply` est **déclaratif** : tu décris l'état désiré ("je veux 3 pods de cette image"), et Kubernetes se charge d'atteindre cet état. Si tu le relances, il met à jour ce qui a changé sans tout recréer.
+> `kubectl apply` est **déclaratif** : vous décrivez l'état désiré ("je veux 3 pods de cette image"), et Kubernetes se charge d'atteindre cet état. Si vous le relancez, il met à jour ce qui a changé sans tout recréer.
 
 ```bash
 # Vérifier les pods (attendre que STATUS = Running et READY = 1/1)
@@ -658,7 +658,7 @@ Résultat :
 
 ## 8. Comparaison réseau — le cœur du TP
 
-C'est la partie que ton professeur a mentionnée : "inspecter le réseau".
+La section suivante présente l'inspection du réseau.
 
 ### Swarm — Architecture réseau
 
